@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //Variables públicas
+    //Variables pï¿½blicas
     public Rigidbody2D rbody;
     public float speed;
     public float jumpForce;
     public LayerMask layer;
+    public Transform pies;
 
     //Variables boleanas
-    private bool onFloor;
+    public bool enSuelo;
 
     // Start is called before the first frame update
     void Start()
@@ -24,30 +25,37 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckGround();
         //SALTO
+        saltando();
+       
+        //MOVIMIENTO HACIA LA DERECHA
+        //this.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, this.GetComponent<Rigidbody2D>().velocity.y);
+    }
+
+    private void saltando()
+    {
         if (Input.GetKeyDown("space"))
         {
-            if (onFloor)
+            if (enSuelo)
             {
                 Debug.Log("Jump!");
                 rbody.velocity = new Vector2(rbody.velocity.x, jumpForce);
             }
+            
         }
-        //MOVIMIENTO HACIA LA DERECHA
-        this.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, this.GetComponent<Rigidbody2D>().velocity.y);
     }
 
     private void CheckGround()
     {
 
-        RaycastHit2D hit = Physics2D.Raycast(rbody.position, Vector2.down, 8);
-        Debug.DrawRay(rbody.position, Vector2.down, Color.yellow, 8);
+        RaycastHit2D hit = Physics2D.Raycast(pies.position, Vector2.down, 0.5f);
+        Debug.DrawRay(pies.position, Vector2.down, Color.yellow, 0.5f);
         if (hit.collider != null)
         {
-            onFloor = true;
+            enSuelo = true;
         }
         else
         {
-            onFloor = false;
+            enSuelo = false;
         }
     }
 }
