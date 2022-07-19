@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // Variables p�blicas
     public Rigidbody2D rbody;
+    public Animator anim;
     public float speed=0;
     public float jumpForce;
     public float walkSpeed;
@@ -28,8 +29,29 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
    private void Update()
     {
-        CheckGround();
+        
         rbody.velocity = new Vector2(speed, rbody.velocity.y);
+        CheckGround();
+        if(enSuelo)
+        {
+            anim.SetBool("saltar", false);
+         
+        }
+        else
+        {
+            if(rbody.velocity.y > 0)
+            {
+                anim.SetBool("saltar", true);
+                  anim.SetFloat("velocidadVertical",1);
+            }
+            else if(rbody.velocity.y < 0)
+            {
+                anim.SetBool("saltar", true);
+                anim.SetFloat("velocidadVertical",-1);
+            }
+        }
+
+
         // SALTO
         // saltando();
        
@@ -39,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump()
     {
+        
         Debug.Log("Jump!");
         if (enSuelo == true)
         {
@@ -51,6 +74,28 @@ public class PlayerMovement : MonoBehaviour
         float moveValue=inputValue.Get<float>();
         Debug.Log("Run!");
         speed = moveValue  * walkSpeed;
+
+        if(moveValue < 0 && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        }
+        else if(moveValue > 0 && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+        else
+        {
+            anim.SetBool("correr", false);
+        }
+ 
+ 
+        if(enSuelo)
+        {
+            anim.SetBool("correr", true);
+            if(moveValue==0){
+                anim.SetBool("correr",false);
+            }
+        }
     }
 
     private void CheckGround()
