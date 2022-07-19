@@ -4515,8 +4515,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 1178540559}
-  speed: 5
+  speed: 0
   jumpForce: 6
+  walkSpeed: 10
   pies: {x: 0, y: -0.9972744}
   layerPiso:
     serializedVersion: 2

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     // Variables p�blicas
     public Rigidbody2D rbody;
-    public float speed;
+    public float speed=0;
     public float jumpForce;
+    public float walkSpeed;
     //public Transform pies;
 
     public Vector2 pies;
@@ -24,14 +26,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   private void Update()
     {
         CheckGround();
+        rbody.velocity = new Vector2(speed, rbody.velocity.y);
         // SALTO
         // saltando();
        
-        // MOVIMIENTO HACIA LA DERECHA
-        this.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, this.GetComponent<Rigidbody2D>().velocity.y);
+        // MOVIMIENTO AUTOMATICO HACIA LA DERECHA
+        //this.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, this.GetComponent<Rigidbody2D>().velocity.y);
     }
 
     private void OnJump()
@@ -41,6 +44,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rbody.velocity = new Vector2(rbody.velocity.x, jumpForce);
         }
+    }
+
+     private void OnMove(InputValue inputValue)
+    {
+        float moveValue=inputValue.Get<float>();
+        Debug.Log("Run!");
+        speed = moveValue  * walkSpeed;
     }
 
     private void CheckGround()
