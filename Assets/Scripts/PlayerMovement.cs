@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -50,18 +51,10 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetFloat("velocidadVertical",-1);
             }
         }
-
-
-        // SALTO
-        // saltando();
-       
-        // MOVIMIENTO AUTOMATICO HACIA LA DERECHA
-        //this.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, this.GetComponent<Rigidbody2D>().velocity.y);
     }
 
     private void OnJump()
     {
-        
         Debug.Log("Jump!");
         if (enSuelo == true)
         {
@@ -101,15 +94,12 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGround()
     {
         enSuelo = Physics2D.OverlapCircle((Vector2)transform.position + pies, radioColision, layerPiso);
-        //RaycastHit2D hit = Physics2D.Raycast(pies.position, Vector2.down, 0.5f);
-        //Debug.DrawRay(pies.position, Vector2.down, Color.yellow, 0.5f);
-        //if (hit.collider != null)
-        //{
-        //    enSuelo = true;
-        //}
-        //else
-        //{
-        //    enSuelo = false;
-        //}
+    }
+
+    public void WhenZorritoDies() {
+
+        //Aparece el boton de restart cuando Zorrito muere
+        //SE TIENE QUE VALIDAR QUE ZORRITO MUERA CUANDO UN ENEMIGO LO GOLPEA, DENTRO DE ESA CONDICION SE AGREGA LA SIGUIENTE LINEA, AL FINAL.
+        /*SceneManager.LoadScene("RestartScene");*/
     }
 }
