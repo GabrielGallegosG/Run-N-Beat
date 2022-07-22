@@ -100,6 +100,22 @@ public class PlayerMovement : MonoBehaviour
 
         //Aparece el boton de restart cuando Zorrito muere
         //SE TIENE QUE VALIDAR QUE ZORRITO MUERA CUANDO UN ENEMIGO LO GOLPEA, DENTRO DE ESA CONDICION SE AGREGA LA SIGUIENTE LINEA, AL FINAL.
-        /*SceneManager.LoadScene("RestartScene");*/
+        SceneManager.LoadScene("RestartScene");
     }
+
+    private void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.tag=="Enemy"){
+            if(enSuelo==false){
+                Destroy(other.gameObject);
+            }else{
+                 Muerte();      
+            }
+           
+        }
+    }
+    private void Muerte(){
+        anim.SetBool("muerte", true);
+       
+    }
+
 }
