@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Variables p�blicas
+    // Variables publicas
     public Rigidbody2D rbody;
     public Animator anim;
     public float speed=0;
     public float jumpForce;
     public float walkSpeed;
     //public Transform pies;
+  
+    public float velocidadRebote;
 
     public Vector2 pies;
     public LayerMask layerPiso;
@@ -103,7 +105,11 @@ public class PlayerMovement : MonoBehaviour
         SceneManager.LoadScene("RestartScene");
     }
 
-    private void OnCollisionEnter2D(Collision2D other){
+    public void Rebote(){
+        rbody.velocity = new Vector2(rbody.velocity.x, velocidadRebote);
+    }
+
+    /*private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag=="Enemy"){
             if(enSuelo==false){
                 Destroy(other.gameObject);
@@ -112,8 +118,9 @@ public class PlayerMovement : MonoBehaviour
             }
            
         }
-    }
-    private void Muerte(){
+    }*/
+
+    public void Muerte(){
         anim.SetBool("muerte", true);
        
     }
