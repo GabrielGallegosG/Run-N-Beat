@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,10 @@ public class PlayerMovement : MonoBehaviour
     public float speed=0;
     public float jumpForce;
     public float walkSpeed;
+
+    private int cereza=0;
+    [SerializeField]private Text cherryText;
+
     //public Transform pies;
   
     public float velocidadRebote;
@@ -19,20 +24,26 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 pies;
     public LayerMask layerPiso;
     public float radioColision;
+    public AudioClip sonidoCherry;
 
     // Variables boleanas
     public bool enSuelo = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private void OnTriggerEnter2D(Collider2D collision){
+        if(collision.tag=="Cerezas"){
+            Destroy(collision.gameObject);
+            cereza +=1;    
+            cherryText.text = cereza.ToString();
+            AudioManager.Instance.ReproducirSonido(sonidoCherry);
 
-    }
+                }
+            }   
+               
 
     // Update is called once per frame
    private void Update()
     {
-        
+        cherryText.text = cereza.ToString();
         rbody.velocity = new Vector2(speed, rbody.velocity.y);
         CheckGround();
         if(enSuelo)
