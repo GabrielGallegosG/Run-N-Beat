@@ -48,7 +48,6 @@ public class Aguila : MonoBehaviour
         {
             velocidadMovimiento = 10;
             transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento_ataque[ruta].position, velocidadMovimiento * Time.deltaTime);
-            an.SetBool("Ataque", true);
             if(Vector2.Distance(transform.position, puntosMovimiento_ataque[ruta].position) < distanciaMinima)
             {
                 ruta += 1;
