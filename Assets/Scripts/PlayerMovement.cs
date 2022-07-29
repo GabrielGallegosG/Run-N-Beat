@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,13 @@ public class PlayerMovement : MonoBehaviour
     public float speed=0;
     public float jumpForce;
     public float walkSpeed;
+    
+    public int score = 0;
+    public Text TXTscore;
+
+    private int cereza=0;
+    [SerializeField]private Text cherryText;
+
     //public Transform pies;
   
     public float velocidadRebote;
@@ -19,20 +27,17 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 pies;
     public LayerMask layerPiso;
     public float radioColision;
+    public AudioClip sonidoCherry;
 
     // Variables boleanas
     public bool enSuelo = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
    private void Update()
     {
-        
+        TXTscore.text = "Score: " + score;
+
+        cherryText.text = cereza.ToString();
         rbody.velocity = new Vector2(speed, rbody.velocity.y);
         CheckGround();
         if(enSuelo)
@@ -52,6 +57,18 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("saltar", true);
                 anim.SetFloat("velocidadVertical",-1);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Cerezas")
+        {
+            Destroy(collision.gameObject);
+            cereza += 1;
+            cherryText.text = cereza.ToString();
+            AudioManager.Instance.ReproducirSonido(sonidoCherry);
+            score = score + 25;
         }
     }
 
@@ -123,6 +140,18 @@ public class PlayerMovement : MonoBehaviour
     public void Muerte(){
         anim.SetBool("muerte", true);
        
+    }
+
+    public void Paro(){
+     anim.SetBool("llegada", true);
+      speed=3;
+
+    }
+
+    public void Stop(){
+         anim.SetBool("llegada", false);
+         anim.SetBool("idle",true);
+        speed=0;
     }
 
 }

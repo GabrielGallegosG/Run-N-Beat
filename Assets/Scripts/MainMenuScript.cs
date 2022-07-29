@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoseMenu : MonoBehaviour
+public class MainMenuScript : MonoBehaviour
 {
-    public void Reiniciar() {
+    public void Play()
+    {
         SceneManager.LoadScene("MainScene");
     }
 
-    public void BackToMainMenu() {
-        SceneManager.LoadScene("MainMenuScene");
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
