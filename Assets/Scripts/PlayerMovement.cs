@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed=0;
     public float jumpForce;
     public float walkSpeed;
+    
+    public int score = 0;
+    public Text TXTscore;
 
     private int cereza=0;
     [SerializeField]private Text cherryText;
@@ -29,20 +32,11 @@ public class PlayerMovement : MonoBehaviour
     // Variables boleanas
     public bool enSuelo = true;
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        if(collision.tag=="Cerezas"){
-            Destroy(collision.gameObject);
-            cereza +=1;    
-            cherryText.text = cereza.ToString();
-            AudioManager.Instance.ReproducirSonido(sonidoCherry);
-
-                }
-            }   
-               
-
     // Update is called once per frame
    private void Update()
     {
+        TXTscore.text = "Score: " + score;
+
         cherryText.text = cereza.ToString();
         rbody.velocity = new Vector2(speed, rbody.velocity.y);
         CheckGround();
@@ -63,6 +57,18 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("saltar", true);
                 anim.SetFloat("velocidadVertical",-1);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Cerezas")
+        {
+            Destroy(collision.gameObject);
+            cereza += 1;
+            cherryText.text = cereza.ToString();
+            AudioManager.Instance.ReproducirSonido(sonidoCherry);
+            score = score + 25;
         }
     }
 
