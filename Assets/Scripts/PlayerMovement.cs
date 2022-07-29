@@ -142,4 +142,16 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
+    public void Paro(){
+     anim.SetBool("llegada", true);
+      speed=3;
+
+    }
+
+    public void Stop(){
+         anim.SetBool("llegada", false);
+         anim.SetBool("idle",true);
+        speed=0;
+    }
+
 }
