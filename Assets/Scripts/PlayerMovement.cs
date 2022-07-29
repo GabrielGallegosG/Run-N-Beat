@@ -142,4 +142,10 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
+    public void Final(){
+        anim.SetBool("final", true);
+        
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
 }
