@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Cerezas
+  - Muro
   layers:
   - Default
   - TransparentFX

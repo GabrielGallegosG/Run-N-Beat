@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Musica : MonoBehaviour
 {
     public AudioClip BGM;
@@ -12,6 +13,7 @@ public class Musica : MonoBehaviour
         if(other.gameObject.tag=="Player"){
              Destroy(this.gameObject);  
             AudioManager.Instance.ReproducirSonido(BGM);
+       
             }   
         }
 }
