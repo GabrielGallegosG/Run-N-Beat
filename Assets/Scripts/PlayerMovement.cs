@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask layerPiso;
     public float radioColision;
     public AudioClip sonidoCherry;
+    private AudioClip BGM;
 
     // Variables boleanas
     public bool enSuelo = true;
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void WhenZorritoDies() {
 
-           GetComponent<Rigidbody2D>().mass = 10000;
+        GetComponent<Rigidbody2D>().mass = 10000;
         //Aparece el boton de restart cuando Zorrito muere
         //SE TIENE QUE VALIDAR QUE ZORRITO MUERA CUANDO UN ENEMIGO LO GOLPEA, DENTRO DE ESA CONDICION SE AGREGA LA SIGUIENTE LINEA, AL FINAL.
         SceneManager.LoadScene("RestartScene");
@@ -126,27 +127,32 @@ public class PlayerMovement : MonoBehaviour
     public void Rebote(){
         rbody.velocity = new Vector2(rbody.velocity.x, velocidadRebote);
     }
-
-    /*private void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag=="Enemy"){
-            if(enSuelo==false){
-                Destroy(other.gameObject);
-            }else{
-                 Muerte();      
-            }
-           
-        }
-    }*/
-
-    public void Muerte(){
+    
+   public void Muerte(){
+        AudioManager.Instance.PararSonido(BGM);
         anim.SetBool("muerte", true);
        
     }
 
-    public void Final(){
-        anim.SetBool("final", true);
-        
-        SceneManager.LoadScene("MainMenuScene");
+    public void Finale(){
+         anim.SetBool("final", true);
+
+
+
+
+
+         Espera();
+
+
+
+         MM();
+    }
+
+IEnumerator Espera(){
+     yield return new WaitForSeconds (5);
+}
+    public void MM(){
+          SceneManager.LoadScene("MainMenuScene");
     }
 
 }

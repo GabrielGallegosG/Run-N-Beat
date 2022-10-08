@@ -13,7 +13,7 @@ public class RanaFuncion : MonoBehaviour
     public Vector2 ancas;
     public LayerMask layerPiso;
     public float radioColision;
-
+    public AudioClip BGM;
 
     // Variables boleanas
     public bool enSuelo = true;
@@ -74,5 +74,6 @@ public class RanaFuncion : MonoBehaviour
 
     private void Morir(){
         Destroy(this.gameObject);  
+        AudioManager.Instance.ReproducirSonido(BGM);
     }
 }

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Stopza : MonoBehaviour
 {
+    IEnumerator Espera(){
+     yield return new WaitForSeconds (5);
+}
    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag=="Player"){
             foreach(ContactPoint2D punto in other.contacts){
-                         other.gameObject.GetComponent<PlayerMovement>().Final();    
+                         other.gameObject.GetComponent<PlayerMovement>().Finale();    
                 }
             }   
         }      

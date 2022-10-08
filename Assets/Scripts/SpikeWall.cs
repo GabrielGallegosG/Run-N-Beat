@@ -7,6 +7,7 @@ public class SpikeWall : MonoBehaviour
     public Rigidbody2D rbody;
     public float speed;
     public bool activation;
+    public GameObject target;
 
     // Update is called once per frame
     void Update()
