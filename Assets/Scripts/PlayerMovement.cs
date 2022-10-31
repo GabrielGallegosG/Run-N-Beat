@@ -135,23 +135,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Finale(){
+       
          anim.SetBool("final", true);
-
-
-
-
-
-         Espera();
-
-
-
-         MM();
+          
     }
+
+     private void OnCollisionEnter2D(Collision2D other){
+            if(other.gameObject.tag=="Muro"){
+            Finale();
+                
+            }
+            
+        }
 
 IEnumerator Espera(){
      yield return new WaitForSeconds (5);
 }
     public void MM(){
+         GetComponent<Rigidbody2D>().mass = 10000;
           SceneManager.LoadScene("MainMenuScene");
     }
 

@@ -73,7 +73,8 @@ public class RanaFuncion : MonoBehaviour
     }
 
     private void Morir(){
+         AudioManager.Instance.ReproducirSonido(BGM);
         Destroy(this.gameObject);  
-        AudioManager.Instance.ReproducirSonido(BGM);
+       
     }
 }

@@ -5,9 +5,6 @@ using UnityEngine;
 public class CaidaMuerte : MonoBehaviour
 {
      public AudioClip Death;
-    
-    
-    
 
      private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag=="Player"){
