@@ -81,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
             rbody.velocity = new Vector2(rbody.velocity.x, jumpForce);
         }
     }
+        private void OnAttack()
+    {
+        Debug.Log("DIE!");
+    }
 
      private void OnMove(InputValue inputValue)
     {
@@ -88,22 +92,16 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Run!");
         speed = moveValue  * walkSpeed;
 
-        if(moveValue < 0 && transform.localScale.x > 0)
-        {
+        if(moveValue < 0 && transform.localScale.x > 0){
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-        }
-        else if(moveValue > 0 && transform.localScale.x < 0)
-        {
+        }else if(moveValue > 0 && transform.localScale.x < 0){
             transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-        }
-        else
-        {
+        }else{
             anim.SetBool("correr", false);
         }
  
  
-        if(enSuelo)
-        {
+        if(enSuelo){
             anim.SetBool("correr", true);
             if(moveValue==0){
                 anim.SetBool("correr",false);
